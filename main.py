@@ -14,9 +14,11 @@ def main():
     print(f"# of testing samples:  {len(test_images)}\n")
 
     print("Loading model...\n")
+    # baseline_model = EmotionModel()
     tuned_model = EmotionModelTuned()
 
     print("Evaluating on testing set")
+    # acc_baseline = baseline_model.evaluate(test_images, test_labels)
     acc = tuned_model.evaluate(test_images, test_labels)
 
     print(f"\nTuned Model Accuracy: {acc}")
