@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 ## Project Goal Evolution
 
-After talking to Leo, we found that training our own multi-million-parameter model from scratch would require many hours in the supercomputing lab and would still be limited by dataset size and class imbalance. As a result, we shifted our approach toward **transfer learning with pretrained Vision Transformers**, allowing us to leverage rich visual representations learned from large-scale datasets. This change enabled faster experimentation, more stable training, and significantly higher accuracy, ultimately allowing us to exceed our original performance goals.
+After talking to Leo, we found that training our own multin million parameter model from scratch would require many hours in the supercomputing lab and would still be limited by dataset size and class imbalance. As a result, we shifted our approach toward **transfer learning with pretrained Vision Transformers**, allowing us to leverage rich visual representations learned from large-scale datasets. This change enabled faster experimentation, more stable training, and significantly higher accuracy, ultimately allowing us to exceed our original performance goals.
 
 ### C-Range Goals
 - Built a complete dataset loader and preprocessing pipeline for RAF-DB  
@@ -45,14 +45,9 @@ After talking to Leo, we found that training our own multi-million-parameter mod
 ### B-Range Goals
 - Initially aimed to train a deep learning emotion classifier from scratch  
 - Implemented full evaluation metrics (accuracy, precision, recall, F1-score)  
-- Visualized model behavior using confusion matrices  
+- Visualized model behavior using confusion matrices
 
-### Evolution to Transfer Learning
-- Shifted from training a custom model to **transfer learning with Vision Transformers**  
-- Leveraged pretrained representations to improve robustness to pose, lighting, and occlusion  
-- Aligned the project with real-world machine learning best practices  
-
-### A-Range Goals (Deployment & Performance)
+### A-Range Goals
 - Built a real-time, webcam-based emotion detection pipeline  
 - Compared fine-tuned models directly against open-source baselines  
 - Exceeded the original **60% accuracy target**, achieving **~74% validation accuracy**  
