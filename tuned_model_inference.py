@@ -2,9 +2,7 @@ from transformers import AutoImageProcessor, AutoModelForImageClassification
 import torch
 from PIL import Image
 
-# -----------------------
 # Device Selection
-# -----------------------
 if torch.backends.mps.is_available():
     device = "mps"
 elif torch.cuda.is_available():
@@ -18,16 +16,14 @@ print("Using device:", device)
 torch.set_float32_matmul_precision("high")
 
 
-# -----------------------
 # Fine-Tuned Emotion Model Wrapper
-# -----------------------
 class EmotionModelTuned:
-    def __init__(self, model_path="fine_tuned_emotion_model"):
+    def __init__(self, model_path="models/ViT-Base"):
         """
         Loads your fine-tuned HuggingFace model from the local folder.
         """
 
-        # Load custom processor + model from local directory
+        # Load processor + model from local directory
         self.processor = AutoImageProcessor.from_pretrained(model_path)
         self.model = AutoModelForImageClassification.from_pretrained(
             model_path
@@ -35,7 +31,7 @@ class EmotionModelTuned:
 
         print("Loaded fine-tuned model from:", model_path)
 
-        # Optional: warm-up for MPS/GPU
+        # Warm-up for MPS/GPU to improve performance
         dummy = torch.ones((1, 3, 224, 224)).to(device)
         with torch.no_grad():
             _ = self.model(dummy)
@@ -46,7 +42,7 @@ class EmotionModelTuned:
         Returns (predicted_label, confidence)
         """
 
-        # Ensure RGB
+        # Check if image is RGB
         if not isinstance(image, Image.Image):
             raise ValueError("Input must be a PIL.Image")
 
@@ -60,16 +56,13 @@ class EmotionModelTuned:
         pred_id = probs.argmax(dim=1).item()
         confidence = probs.max().item()
 
-        # Convert using id2label mapping
+        # Convert using our predefined id2label mapping
         label_str = self.model.config.id2label[pred_id]
 
         return label_str, confidence
 
     def evaluate(self, images, labels):
-        """
-        Evaluate accuracy over a list of (PIL.Image, int_label).
-        """
-
+        # Evaluate accuracy over a list of (PIL.Image, int_label)
         correct = 0
         total = len(images)
         img_num = 0
@@ -78,7 +71,7 @@ class EmotionModelTuned:
             img_num += 1
             print(f"Model 1 predicting image: {img_num}")
 
-            # Convert label string back to class ID
+            # Convert label string back to our class ID
             pred_id = int([k for k, v in self.model.config.id2label.items() if v == pred_label_str][0])
 
             if pred_id == label:

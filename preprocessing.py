@@ -11,6 +11,7 @@ FER_LABEL_MAP = {
     "neutral": 6
 }
 
+# Load train or test split
 def load_split(split_root):
     images = []
     labels = []
@@ -24,14 +25,14 @@ def load_split(split_root):
         for img_file in os.listdir(class_dir):
             img_path = os.path.join(class_dir, img_file)
 
-            # open grayscale 48x48 → convert to RGB for HF processor
+            # open image then convert to RGB for HF processor
             img = Image.open(img_path).convert("RGB")
             images.append(img)
             labels.append(class_idx)
 
     return images, labels
 
-
+# Load train and test splits
 def load_train_test(dataset_root):
     train_root = os.path.join(dataset_root, "train")
     test_root  = os.path.join(dataset_root, "test")

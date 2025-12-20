@@ -1,10 +1,9 @@
 from preprocessing import load_train_test
-from inference import EmotionModel
 from tuned_model_inference import EmotionModelTuned
 import os
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATASET_ROOT = os.path.join(CURRENT_DIR, "FER-2013")
+DATASET_ROOT = os.path.join(CURRENT_DIR, "DATASET")
 
 # pipeline that loads images, loads the model, and evaluates the model accuracy
 def main():
@@ -15,15 +14,12 @@ def main():
     print(f"# of testing samples:  {len(test_images)}\n")
 
     print("Loading model...\n")
-    model = EmotionModel()
-    # tuned_model = EmotionModelTuned()
+    tuned_model = EmotionModelTuned()
 
     print("Evaluating on testing set")
-    acc = model.evaluate(test_images, test_labels)
-    # acc2 = tuned_model.evaluate(test_images, test_labels)
+    acc = tuned_model.evaluate(test_images, test_labels)
 
-    print(f"\nBase Model Accuracy: {acc}")
-    # print(f"\nTuned Model Accuracy: {acc2}")
+    print(f"\nTuned Model Accuracy: {acc}")
 
 
 # runs main function

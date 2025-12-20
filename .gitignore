@@ -1,1 +1,8 @@
-fine_tuned_emotion_model_003/
+# Virtual environment
+.venv/
+
+# Python
+__pycache__/
+
+# MacOS
+.DS_Store
