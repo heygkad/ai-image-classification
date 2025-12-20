@@ -5,7 +5,7 @@ Real-time facial emotion recognition using transfer learning on various Vision T
 # IMPORTANT:
 ## All of our trained models must be downloaded from this google drive for testing: [Drive Folder Link](https://drive.google.com/drive/folders/1jRLWKNgA3CNP6lV7YG9vYRan0H0rKTqZ?usp=sharing)
 ## After downloading, unzip, and drag the model folders contained (ViT-Base, DeIT-Small, etc.) into the `models/` folder
-### This is due to GitHub Enterprise (github.iu.edu) now allowing file sizes larger than 100MB, even with GitHub LFS.
+### This is due to GitHub not allowing file sizes larger than 100MB, and using GitHub LFS seemed to break our models' safetensor files when pulling from GitHub.
 
 ## First-time setup
 
